@@ -17,13 +17,13 @@ from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig():
-    logging.info("***  Object Initiallized of class- DataTransformationConfig() ***")
+    logging.info("***  Object Initiallized of class- DataTransformationConfig: ***")
     preprocessor_obj_file_pattern = os.path.join("artifacts","preprocessor.pkl")
     
 
 class DataTransformation():
     def __init__(self) -> None:
-        logging.info("***  Object Initiallized of class- DataTransformation() ***")
+        logging.info("***  Object Initiallized of class- DataTransformation: ***")
         self.data_transformation_config = DataTransformationConfig()
 
     def get_data_transformer_obj(self):

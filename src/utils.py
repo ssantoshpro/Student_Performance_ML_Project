@@ -8,6 +8,7 @@ import dill
 from src.logger import logging
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV
+import pickle
 
 def save_object(file_path, obj):
     logging.info("*** Function called - save_object() ***")
@@ -26,7 +27,7 @@ def save_object(file_path, obj):
 def evaluate_model(X_train, y_train, X_test, y_test, models, param):
     try:
         report = {}
-
+        logging.info("*** Function called - load_object() ***")
         for i in range(len(list(models))):
             model = list(models.values())[i]
             para = param[list(models.keys())[i]]
@@ -42,8 +43,17 @@ def evaluate_model(X_train, y_train, X_test, y_test, models, param):
             test_model_score = r2_score(y_test, y_test_pred)
 
             report[list(models.keys())[i]] = test_model_score
-
+        logging.info(f"Generated model report")
         return report
 
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    logging.info("*** Function called - load_object() ***")
+    try:
+        with open(file_path, "rb") as file_obj:
+                return pickle.load(file_obj)
+       
     except Exception as e:
         raise CustomException(e, sys)
