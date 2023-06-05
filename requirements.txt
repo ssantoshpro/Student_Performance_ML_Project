@@ -3,4 +3,8 @@ numpy
 seaborn
 streamlit
 flask
--e .
+matplotlib
+scikit-learn
+catboost
+xgboost
+#-e .
