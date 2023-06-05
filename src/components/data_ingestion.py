@@ -5,24 +5,38 @@ from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+import re
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 
 @dataclass
 class DataIngestionConfig:
+    logging.info("***  Object Initiallized of class- DataIngestionConfig() ***")
     train_data_path: str = os.path.join('artifact',"train.csv")
     test_data_path: str = os.path.join('artifact',"test.csv")
     raw_data_path: str = os.path.join('artifact',"data.csv")
 
 class DataIngestion:
     def __init__(self):
+        logging.info("***  Object Initiallized of class- DataIngestion() ***")
         self.ingestion_config=DataIngestionConfig()
 
     def initiate_data_ingestion(self):
+        logging.info("*** Function called - initiate_data_ingestion() ***")
         logging.info("++++ Entered the data ingestion method/component ++++")
         try:
             df = pd.read_csv('Notebook\data\StudentsPerformance.csv')
-            logging.info('Read the dataset and loaded to DataFrame')
+            logging.info('Procured the data from the Source: *.CSV file')
+            ###
+            old_col = list(df.columns)
+            # new_col = [str(col).replace(string.punctuation,"_").replace(" ","_") for col in list(df.columns)]
+            new_col = [str(re.sub('[^a-zA-Z0-9\n\.]', '_',col)) for col in list(df.columns)]
 
+            rename_col={}
+            rename_col.update(zip(old_col,new_col))
+            df.rename(columns = rename_col, inplace=True)
+            #####
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
@@ -44,4 +58,7 @@ class DataIngestion:
         
 if __name__=="__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_path, test_path = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_path, test_path)
