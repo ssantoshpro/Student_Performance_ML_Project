@@ -18,7 +18,7 @@ from src.utils import save_object
 @dataclass
 class DataTransformationConfig():
     logging.info("***  Object Initiallized of class- DataTransformationConfig() ***")
-    preprocessor_obj_file_pattern = os.path.join("artifact","preprocessor.pkl")
+    preprocessor_obj_file_pattern = os.path.join("artifacts","preprocessor.pkl")
     
 
 class DataTransformation():
@@ -47,7 +47,7 @@ class DataTransformation():
                 steps=[
                     ("imputer", SimpleImputer(strategy="most_frequent")),
                     ("one_hot_encoder", OneHotEncoder()),
-                    ("scaler", StandardScaler())
+                    ("scaler", StandardScaler(with_mean=False))
                 ],
             )
 
@@ -108,8 +108,7 @@ class DataTransformation():
 
             return(
                 train_arr,
-                test_arr,
-                self.data_transformation_config.preprocessor_obj_file_pattern,
+                test_arr
             )
         except Exception as e:
             raise CustomException(e, sys)
