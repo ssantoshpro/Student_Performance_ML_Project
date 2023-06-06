@@ -6,8 +6,8 @@ from flask import Flask, request, render_template
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData, PredictPipleline
 
-static_path = os.path.abspath(r"templates\assets")
-application = Flask(__name__,static_folder=static_path)
+#static_path = os.path.abspath(r"templates\assets")
+application = Flask(__name__)#,static_folder=static_path)
 
 app = application
 
