@@ -8,7 +8,7 @@ static_path = os.path.abspath(r"templates\assets")
 application = app = Flask(__name__,static_folder=static_path)
 
 
-## Route for home page
+## Route for home pages
 @application.route("/")
 def index():
     return render_template("index.html")
