@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append("/path_to_your_app/eb-flask")
+# sys.path.append("/path_to_your_app/eb-flask")
 from flask import Flask, request, render_template
 from src.pipeline.predict_pipeline import CustomData, PredictPipleline
 
