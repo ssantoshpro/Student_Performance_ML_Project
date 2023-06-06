@@ -1,11 +1,11 @@
 import os
 import sys
-# sys.path.append("/path_to_your_app/eb-flask")
+
 from flask import Flask, request, render_template
 from src.pipeline.predict_pipeline import CustomData, PredictPipleline
 
-#static_path = os.path.abspath(r"templates\assets")
-application = app = Flask(__name__)#,static_folder=static_path)
+static_path = os.path.abspath(r"templates\assets")
+application = app = Flask(__name__,static_folder=static_path)
 
 
 ## Route for home page
@@ -40,4 +40,4 @@ def predict_dataPoint():
         return render_template('home.html',results = results[0])
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0')
+    app.run(host='0.0.0.0')
