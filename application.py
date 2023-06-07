@@ -4,7 +4,8 @@ from src.pipeline.predict_pipeline import CustomData, PredictPipleline
 # static_path = os.path.abspath(r"templates\assets")
 application = Flask(__name__)#,static_folder=static_path)
 
-# app = application
+# app = application 
+# #testing
 
 ## Route for home page flow
 @application.route("/")
