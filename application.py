@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 from src.pipeline.predict_pipeline import CustomData, PredictPipleline
+from logging import FileHandler,WARNING
 
 # print a nice greeting.
 def say_hello(username = "World"):
@@ -16,8 +17,9 @@ home_link = '<p><a href="/">Back</a></p>\n'
 footer_text = '</body>\n</html>'
 
 # EB looks for an 'application' callable by default.
-application = Flask(__name__)
-
+application = Flask(__name__,template_folder = 'template')
+file_handler = FileHandler('errorlog.txt')
+file_handler.setLevel(WARNING)
 # add a rule for the index page.
 # application.add_url_rule('/', 'index', (lambda: header_text +
 #     say_hello() + instructions + footer_text))
