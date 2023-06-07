@@ -17,7 +17,7 @@ home_link = '<p><a href="/">Back</a></p>\n'
 footer_text = '</body>\n</html>'
 
 # EB looks for an 'application' callable by default.
-application = Flask(__name__,template_folder = 'template')
+application = Flask(__name__,template_folder = 'templates')
 file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
 # add a rule for the index page.
