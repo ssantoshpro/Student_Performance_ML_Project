@@ -5,5 +5,5 @@ matplotlib
 scikit-learn
 catboost
 Flask
-
+dill
 #-e .
