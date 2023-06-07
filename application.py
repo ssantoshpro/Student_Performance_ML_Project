@@ -42,7 +42,7 @@ def index():
 @application.route('/predictdata',methods=['GET','POST'])
 def predict_dataPoint():
     if request.method=='GET':
-        return render_template('home.html')
+        return render_template('home.html',results ="Please fill the dependent values above")
     else :
         data = CustomData(
             gender = request.form.get("gender"),
@@ -59,7 +59,7 @@ def predict_dataPoint():
 
         predict_pipeline = PredictPipleline()
         results = predict_pipeline.predict(pred_df)
-        return render_template('home.html',results = results[0])
+        return render_template('home.html',results = str(round(results[0],2)))
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0',port=5000,debug=True)
