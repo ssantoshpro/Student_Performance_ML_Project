@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 
 #Personal Folders
-artifact/
+artifacts/
 catboost_info/
