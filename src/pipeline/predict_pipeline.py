@@ -12,7 +12,8 @@ class PredictPipleline:
     def predict(self,features):
         try:
             logging.info("*** Function called - predict() ***")
-            model_path = "artifacts\model.pkl"
+            model_path = os.path.join("artifacts","model.pkl")
+            # model_path = "artifacts\model.pkl"
             preprocessor_path = "artifacts\preprocessor.pkl"
 
             model = load_object(file_path = model_path)
