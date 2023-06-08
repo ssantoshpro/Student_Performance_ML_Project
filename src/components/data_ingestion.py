@@ -26,7 +26,7 @@ class DataIngestion:
         logging.info("*** Function called - initiate_data_ingestion() ***")
         logging.info("++++ Entered the data ingestion method/component ++++")
         try:
-            df = pd.read_csv('Notebook\data\StudentsPerformance.csv')
+            df = pd.read_csv(os.path.join("Notebook","data","StudentsPerformance.csv"))
             logging.info('Procured the data from the Source: *.CSV file')
             ###
             old_col = list(df.columns)
