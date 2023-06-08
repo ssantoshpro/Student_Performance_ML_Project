@@ -1,1 +1,8 @@
 <h1>Welcome Samtron</h1>
+<form action="{{ url_for('index')}}" method="post">
+    <div >
+        <input class="btn btn-primary" type="submit" value="Start Training"" required  name="training_ind"/>
+    </div>
+    <h2>
+       {{trained}}
+    </h2>

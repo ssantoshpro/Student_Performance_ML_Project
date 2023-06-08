@@ -1,7 +1,8 @@
 from flask import Flask, request, render_template
 from src.pipeline.predict_pipeline import CustomData, PredictPipleline
 from logging import FileHandler,WARNING
-
+import logging 
+from src.components.data_ingestion import data_training
 # print a nice greeting.
 def say_hello(username = "World"):
     return '<p>Hello %s!</p>\n' % username
@@ -16,10 +17,11 @@ instructions = '''
 home_link = '<p><a href="/">Back</a></p>\n'
 footer_text = '</body>\n</html>'
 
+
 # EB looks for an 'application' callable by default.
 application = Flask(__name__,template_folder = 'templates')
 file_handler = FileHandler('errorlog.txt')
-file_handler.setLevel(WARNING)
+# file_handler.setLevel(WARNING)
 # add a rule for the index page.
 # application.add_url_rule('/', 'index', (lambda: header_text +
 #     say_hello() + instructions + footer_text))
@@ -36,10 +38,12 @@ application.add_url_rule('/<username>', 'hello', (lambda username:
 # #testing
 
 ## Route for home page flow
-@application.route("/")
+@application.route("/",methods=['GET','POST'])
 def index():
-    return render_template("index.html")
-
+    if request.method=='GET':
+        return render_template('index.html',trained ="click button -Start Training- if you want to train it from scratch")
+    else :
+        return render_template('index.html',trained = data_training())
 
 @application.route('/predictdata',methods=['GET','POST'])
 def predict_dataPoint():
@@ -62,6 +66,8 @@ def predict_dataPoint():
         predict_pipeline = PredictPipleline()
         results = predict_pipeline.predict(pred_df)
         return render_template('home.html',results = str(round(results[0],2)))
+    
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0',port=5000,debug=True)
